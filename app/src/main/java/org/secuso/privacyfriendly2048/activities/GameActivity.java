@@ -802,6 +802,11 @@ public class GameActivity extends BaseActivityWithoutNavBar {
             case KeyEvent.KEYCODE_DPAD_DOWN:
                 handleSwipeBottom();
                 return true;
+            case KeyEvent.KEYCODE_Z:
+                if (event.isCtrlPressed()) {
+                    handleUndo();
+                }
+                return true;
         }
         return super.onKeyDown(keyCode, event);
     }
