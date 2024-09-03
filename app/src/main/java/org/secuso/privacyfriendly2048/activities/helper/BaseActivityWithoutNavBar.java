@@ -20,6 +20,7 @@ package org.secuso.privacyfriendly2048.activities.helper;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.View;
 
 import com.google.android.material.navigation.NavigationView.OnNavigationItemSelectedListener;
 import androidx.core.app.TaskStackBuilder;
@@ -38,11 +39,11 @@ import org.secuso.privacyfriendly2048.R;
  * @version 20171017
  * This class is a parent class of all activities that can be accessed from the
  * Navigation Drawer (example see MainActivity.java)
- *
+ * <p>
  * The default NavigationDrawer functionality is implemented in this class. If you wish to inherit
  * the default behaviour, make sure the content view has a NavigationDrawer with the id 'nav_view',
  * the header should point to 'nav_header_main' and the menu should be loaded from 'main_drawer'.
- *
+ * <p>
  * Also the main layout that holds the content of the activity should have the id 'main_content'.
  * This way it will automatically fade in and out every time a transition is happening.
  *

@@ -17,9 +17,7 @@
 package org.secuso.privacyfriendly2048
 
 import android.app.Application
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.os.Build
+import android.preference.PreferenceManager
 import android.util.Log
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.work.Configuration
@@ -29,12 +27,25 @@ import org.secuso.privacyfriendlybackup.api.pfa.BackupManager
 
 class PF2048 : Application(), Configuration.Provider {
     override fun onCreate() {
+        super.onCreate()
         BackupManager.backupCreator = BackupCreator()
         BackupManager.backupRestorer = BackupRestorer()
-        super.onCreate()
+
+        when (PreferenceManager.getDefaultSharedPreferences(applicationContext)
+            .getString("currentTheme", "system")) {
+            "dark" -> {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            }
+
+            "light" -> {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            }
+
+            else -> {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+            }
+        }
     }
 
-    override fun getWorkManagerConfiguration(): Configuration {
-        return Configuration.Builder().setMinimumLoggingLevel(Log.INFO).build()
-    }
+    override val workManagerConfiguration = Configuration.Builder().setMinimumLoggingLevel(Log.INFO).build()
 }
